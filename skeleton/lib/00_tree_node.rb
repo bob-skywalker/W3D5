@@ -1,3 +1,4 @@
+require 'byebug'
 class PolyTreeNode
     def initialize(val)
         @parent = nil 
@@ -79,9 +80,27 @@ class PolyTreeNode
     end  
 
     def bfs(target_value)
-        return self if self.value == target_value
+        # return self if self.value == target_value
         return nil if self.children.length == 0
+        # debugger
 
-        
-    end 
+        queue = [self]
+        # queue << self
+        until queue.empty?
+         
+            el = queue.shift
+            return el if el.value == target_value
+            # else 
+                el.children.each do |child|
+                    queue << child 
+                end 
+            # end 
+        end
+
+        nil
+    end
+
 end 
+
+ n = PolyTreeNode.new(3)
+ print n.bfs(2)
